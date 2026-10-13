@@ -105,11 +105,17 @@ INSERT INTO doctors (user_id, specialization, license_number, experience_years, 
 
 INSERT INTO users (username, email, password_hash, full_name, phone, role, status) VALUES
 ('john_smith', 'john@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'John Smith', '5555555555', 'PATIENT', 'ACTIVE'),
-('jane_doe', 'jane@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'Jane Doe', '5555555556', 'PATIENT', 'ACTIVE');
+('jane_doe', 'jane@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'Jane Doe', '5555555556', 'PATIENT', 'ACTIVE'),
+('robert_brown', 'robert@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'Robert Brown', '5555555557', 'PATIENT', 'ACTIVE'),
+('susan_wilson', 'susan@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'Susan Wilson', '5555555558', 'PATIENT', 'ACTIVE'),
+('michael_davis', 'michael@email.com', '$2a$10$dXJ3SW6G7P50eS3tLvtgmejNjyHxdgkl3Z5mHa4dxkHHZhNZSUSE2', 'Michael Davis', '5555555559', 'PATIENT', 'ACTIVE');
 
 INSERT INTO patients (user_id, date_of_birth, gender, blood_group, allergies) VALUES
 (5, '1990-05-15', 'M', 'O+', 'Penicillin'),
-(6, '1985-03-22', 'F', 'B+', 'None');
+(6, '1985-03-22', 'F', 'B+', 'None'),
+(7, '1992-07-10', 'M', 'A+', 'Peanuts'),
+(8, '1988-11-30', 'F', 'AB+', 'Latex'),
+(9, '1995-02-18', 'M', 'O-', 'Shellfish');
 
 INSERT INTO appointments (patient_id, doctor_id, appointment_date, start_time, end_time, status, reason_for_visit) VALUES
 (1, 1, '2025-02-15', '10:00:00', '10:30:00', 'SCHEDULED', 'Cardiac Checkup'),
