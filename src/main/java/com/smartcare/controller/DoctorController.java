@@ -1,0 +1,55 @@
+package com.smartcare.controller;
+
+import com.smartcare.dto.DoctorDTO;
+import com.smartcare.entity.Doctor;
+import com.smartcare.service.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/doctors")
+@CrossOrigin(origins = "*", maxAge = 3600)
+public class DoctorController {
+    @Autowired
+    private DoctorService doctorService;
+
+    @PostMapping
+    public ResponseEntity<DoctorDTO> addDoctor(@RequestBody Doctor doctor) {
+        DoctorDTO doctorDTO = doctorService.addDoctor(doctor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(doctorDTO);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DoctorDTO> getDoctorById(@PathVariable Integer id) {
+        DoctorDTO doctorDTO = doctorService.getDoctorById(id);
+        return ResponseEntity.ok(doctorDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DoctorDTO>> getAllDoctors() {
+        List<DoctorDTO> doctors = doctorService.getAllDoctors();
+        return ResponseEntity.ok(doctors);
+    }
+
+    @GetMapping("/specialization/{specialization}")
+    public ResponseEntity<List<DoctorDTO>> getDoctorsBySpecialization(@PathVariable String specialization) {
+        List<DoctorDTO> doctors = doctorService.getDoctorsBySpecialization(specialization);
+        return ResponseEntity.ok(doctors);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DoctorDTO> updateDoctor(@PathVariable Integer id, @RequestBody Doctor doctorDetails) {
+        DoctorDTO doctorDTO = doctorService.updateDoctor(id, doctorDetails);
+        return ResponseEntity.ok(doctorDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDoctor(@PathVariable Integer id) {
+        doctorService.deleteDoctor(id);
+        return ResponseEntity.noContent().build();
+    }
+}

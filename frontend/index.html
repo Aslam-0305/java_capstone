@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCare - Hospital Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">🏥 SmartCare</div>
+            <div class="nav-buttons">
+                <button id="logoutBtn" class="btn btn-logout" style="display:none;">Logout</button>
+            </div>
+        </nav>
+
+        <div id="roleSelection" class="role-selection">
+            <div class="role-card-container">
+                <h1>Select Your Role</h1>
+                <div class="role-cards">
+                    <button class="role-card" onclick="goToLogin('admin')">
+                        <div class="icon">👨‍💼</div>
+                        <h3>Admin</h3>
+                        <p>Manage users and system</p>
+                    </button>
+                    <button class="role-card" onclick="goToLogin('patient')">
+                        <div class="icon">👤</div>
+                        <h3>Patient</h3>
+                        <p>Book appointments</p>
+                    </button>
+                    <button class="role-card" onclick="goToLogin('doctor')">
+                        <div class="icon">👨‍⚕️</div>
+                        <h3>Doctor</h3>
+                        <p>Manage patients</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loginContainer" class="login-container" style="display:none;">
+            <form id="loginForm" class="login-form">
+                <h2>SmartCare Login</h2>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p id="loginError" class="error"></p>
+                <p><a href="#" onclick="goToRoleSelection()">Back to Role Selection</a></p>
+            </form>
+        </div>
+
+        <div id="dashboard" class="dashboard" style="display:none;">
+            <div class="sidebar">
+                <div class="user-info">
+                    <p id="userDisplay"></p>
+                </div>
+                <nav id="sidebarNav" class="sidebar-nav"></nav>
+            </div>
+            <div class="main-content">
+                <div id="content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

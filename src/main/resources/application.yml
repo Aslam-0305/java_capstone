@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: smartcare-clinic-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/smartcare_clinic?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: smartcare_user
+    password: smartcare_pass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/smartcare_clinic
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+jwt:
+  secret: your-secret-key-change-this-in-production-very-long-secret-key-minimum-256-bits
+  expiration: 86400000
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    root: INFO
+    com.smartcare: DEBUG
+  file:
+    name: logs/application.log

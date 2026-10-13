@@ -1,0 +1,74 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+bin/
+.gradle/
+
+# Build outputs
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Runtime
+*.log
+logs/
+*.pid
+.jdtScope
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.h2.db
+
+# Node (if used for frontend build)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Docker
+.docker/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test coverage
+.coverage
+htmlcov/
+coverage/
+
+# IDE temp files
+*.bak
+*.tmp
+*.temp
