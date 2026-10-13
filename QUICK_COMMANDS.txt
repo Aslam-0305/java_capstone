@@ -1,0 +1,104 @@
+========================================
+QUICK REFERENCE - SUBMISSION COMMANDS
+========================================
+
+QUESTION 19: SHOW TABLES
+-------------------------
+USE smartcare_clinic;
+SHOW TABLES;
+
+
+QUESTION 20: SELECT 5 PATIENTS
+-------------------------------
+USE smartcare_clinic;
+SELECT * FROM patients LIMIT 5;
+
+
+QUESTION 21: DAILY APPOINTMENT REPORT
+--------------------------------------
+USE smartcare_clinic;
+CALL GetDailyAppointmentReportByDoctor(1, '2025-02-15');
+
+
+QUESTION 22: MOST PATIENTS BY MONTH
+------------------------------------
+USE smartcare_clinic;
+CALL GetDoctorWithMostPatientsByMonth(2, 2025);
+
+
+QUESTION 23: MOST PATIENTS BY YEAR
+-----------------------------------
+USE smartcare_clinic;
+CALL GetDoctorWithMostPatientsByYear(2025);
+
+
+QUESTION 24: GET ALL DOCTORS (CURL)
+------------------------------------
+# Step 1: Login
+curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"admin@smartcare.com\",\"password\":\"password123\"}"
+
+# Step 2: Get doctors (replace YOUR_JWT_TOKEN)
+curl -X GET http://localhost:8080/api/doctors -H "Authorization: Bearer YOUR_JWT_TOKEN" -H "Content-Type: application/json"
+
+
+QUESTION 25: GET PATIENT APPOINTMENTS (CURL)
+---------------------------------------------
+# Step 1: Login as patient
+curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@email.com\",\"password\":\"password123\"}"
+
+# Step 2: Get appointments (replace PATIENT_JWT_TOKEN)
+curl -X GET http://localhost:8080/api/appointments/my-appointments -H "Authorization: Bearer PATIENT_JWT_TOKEN" -H "Content-Type: application/json"
+
+
+QUESTION 26: GET DOCTORS BY SPECIALIZATION (CURL)
+--------------------------------------------------
+# Step 1: Login (if not done)
+curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"admin@smartcare.com\",\"password\":\"password123\"}"
+
+# Step 2: Get doctors by specialization
+curl -X GET "http://localhost:8080/api/doctors?specialization=Cardiology" -H "Authorization: Bearer YOUR_JWT_TOKEN" -H "Content-Type: application/json"
+
+
+========================================
+POWERSHELL VERSIONS (FOR WINDOWS)
+========================================
+
+QUESTION 24 - PowerShell:
+-------------------------
+$loginResponse = Invoke-RestMethod -Uri "http://localhost:8080/api/auth/login" -Method POST -ContentType "application/json" -Body '{"email":"admin@smartcare.com","password":"password123"}'
+$token = $loginResponse.token
+Invoke-RestMethod -Uri "http://localhost:8080/api/doctors" -Method GET -Headers @{"Authorization"="Bearer $token"; "Content-Type"="application/json"}
+
+
+QUESTION 25 - PowerShell:
+-------------------------
+$patientLogin = Invoke-RestMethod -Uri "http://localhost:8080/api/auth/login" -Method POST -ContentType "application/json" -Body '{"email":"john@email.com","password":"password123"}'
+$patientToken = $patientLogin.token
+Invoke-RestMethod -Uri "http://localhost:8080/api/appointments/my-appointments" -Method GET -Headers @{"Authorization"="Bearer $patientToken"; "Content-Type"="application/json"}
+
+
+QUESTION 26 - PowerShell:
+-------------------------
+Invoke-RestMethod -Uri "http://localhost:8080/api/doctors?specialization=Cardiology" -Method GET -Headers @{"Authorization"="Bearer $token"; "Content-Type"="application/json"}
+
+
+========================================
+BEFORE RUNNING COMMANDS
+========================================
+
+1. Start the application:
+   docker-compose up -d
+   OR
+   mvn spring-boot:run
+
+2. Initialize database:
+   mysql -u root -p < database/init.sql
+   mysql -u root -p smartcare_clinic < database/stored_procedures.sql
+
+3. Verify application is running:
+   http://localhost:8080/api/doctors
+
+4. Default credentials:
+   - Admin: admin@smartcare.com / password123
+   - Doctor: emily@smartcare.com / password123
+   - Patient: john@email.com / password123
