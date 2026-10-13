@@ -22,5 +22,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     @Query("SELECT d FROM Doctor d WHERE d.user.id = :userId")
     Optional<Doctor> findByUserId(@Param("userId") Integer userId);
 
+    @Query("SELECT d FROM Doctor d JOIN d.user u WHERE u.email = :email")
+    Optional<Doctor> findByEmail(@Param("email") String email);
+
     List<Doctor> findAll();
 }

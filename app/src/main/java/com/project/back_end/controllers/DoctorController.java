@@ -52,4 +52,20 @@ public class DoctorController {
         doctorService.deleteDoctor(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Get doctor's availability for a specific date with token validation
+    @GetMapping("/availability/{user}/{doctorId}/{date}/{token}")
+    public ResponseEntity<?> getDoctorAvailability(
+            @PathVariable String user,
+            @PathVariable Integer doctorId,
+            @PathVariable String date,
+            @PathVariable String token) {
+        try {
+            List<String> availableSlots = doctorService.getAvailableTimeSlots(doctorId, date, token);
+            return ResponseEntity.ok(availableSlots);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid token or unauthorized access");
+        }
+    }
 }

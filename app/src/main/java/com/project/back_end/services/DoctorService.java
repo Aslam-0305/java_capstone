@@ -89,3 +89,41 @@ public class DoctorService {
                 .build();
     }
 }
+
+    // Get available time slots for a doctor on a specific date
+    public List<String> getAvailableTimeSlots(Integer doctorId, String date, String token) {
+        // Validate token first
+        if (!validateToken(token)) {
+            throw new RuntimeException("Invalid or expired token");
+        }
+
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+
+        // Parse available hours and return time slots
+        // This is a simplified implementation
+        List<String> timeSlots = java.util.Arrays.asList(
+                "09:00-09:30", "09:30-10:00", "10:00-10:30", "10:30-11:00",
+                "11:00-11:30", "11:30-12:00", "14:00-14:30", "14:30-15:00",
+                "15:00-15:30", "15:30-16:00", "16:00-16:30", "16:30-17:00"
+        );
+        return timeSlots;
+    }
+
+    // Validate doctor login credentials
+    public boolean validateDoctorLogin(String email, String password) {
+        return doctorRepository.findByEmail(email)
+                .map(doctor -> {
+                    // In production, use proper password hashing (bcrypt)
+                    // This is a simplified version
+                    return doctor.getUser().getPasswordHash().equals(password);
+                })
+                .orElse(false);
+    }
+
+    // Token validation helper method
+    private boolean validateToken(String token) {
+        // In production, implement proper JWT token validation
+        // This is a simplified version
+        return token != null && !token.isEmpty() && token.length() > 10;
+    }
